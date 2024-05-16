@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Профиль</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+
+    <aside th:insert="blocks/aside :: aside"></aside>
+
+    <div class="body-wrapper">
+
+        <header th:insert="blocks/header :: header"></header>
+
+        <div class="container-fluid w-50">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title fw-semibold">Профиль</h5>
+                </div>
+                <div class="card-body">
+
+                    <div th:if="${message}" class="alert alert-warning text-center">
+                        <strong th:text="${message}"></strong>
+                    </div>
+
+                    <div class="text-center mb-2" style="height: 300px">
+                        <img th:src="${'/img/' + user.photo}" alt="photo" class="rounded shadow"
+                             style="max-width: 100%;max-height: 300px">
+                    </div>
+                        <hr>
+                    <form action="/profile/photo" method="post" enctype="multipart/form-data" class="mb-2">
+                        <input type="file" required class="form-control w-100 mb-2" name="photo" accept="/img/*">
+                        <button type="submit" class="btn btn-primary w-100">Обновить фото</button>
+                    </form>
+                    <hr>
+                    <form action="/profile/edit" method="post">
+                        <input type="text" required class="form-control mb-2" name="fio" placeholder="ФИО"
+                               th:value="${user.fio}">
+                        <input type="email" class="form-control mb-2" name="email" placeholder="Эл. почта"
+                               th:value="${user.email}">
+                        <button type="submit" class="btn btn-primary w-100">Обновить</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div th:insert="blocks/footer :: footer"></div>
+
+</div>
+
+</body>
+
+</html>

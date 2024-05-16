@@ -1,0 +1,115 @@
+<aside th:fragment="aside">
+
+    <aside class="left-sidebar">
+        <div>
+
+            <div class="brand-logo d-flex align-items-center justify-content-between">
+                <a href="./index.html" class="text-nowrap logo-img">
+                    <img src="/img/logos/logo.png" width="180" alt=""/>
+                </a>
+                <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+                    <i class="ti ti-x fs-8"></i>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+                <ul id="sidebarnav">
+                    <li th:if="${role == 'ADMIN'}" class="sidebar-item">
+                        <a class="sidebar-link" href="/users" aria-expanded="false">
+                            <span>
+                              <i class="ti ti-users"></i>
+                            </span>
+                            <span class="hide-menu">Пользователи</span>
+                        </a>
+                    </li>
+                    <li th:if="${role == 'ADMIN'}" class="sidebar-item">
+                        <a class="sidebar-link" href="/stats" aria-expanded="false">
+                            <span>
+                              <i class="ti ti-file-analytics"></i>
+                            </span>
+                            <span class="hide-menu">Аналитика</span>
+                        </a>
+                    </li>
+                    <li th:if="${role == 'ADMIN'}" class="sidebar-item">
+                        <a class="sidebar-link" href="/finance" aria-expanded="false">
+                            <span>
+                              <i class="ti ti-brand-google-analytics"></i>
+                            </span>
+                            <span class="hide-menu">Финансы</span>
+                        </a>
+                    </li>
+                    <li th:if="${role == 'ADMIN'}" class="sidebar-item">
+                        <a class="sidebar-link" href="/contractors" aria-expanded="false">
+                            <span>
+                              <i class="ti ti-box"></i>
+                            </span>
+                            <span class="hide-menu">Подрядчики</span>
+                        </a>
+                    </li>
+                    <li th:if="${role == 'MANAGER'}" class="sidebar-item">
+                        <a class="sidebar-link" href="/accounts" aria-expanded="false">
+                            <span>
+                              <i class="ti ti-box"></i>
+                            </span>
+                            <span class="hide-menu">Банковские счета</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="/documents" aria-expanded="false">
+                            <span>
+                              <i class="ti ti-file"></i>
+                            </span>
+                            <span class="hide-menu">Документы</span>
+                        </a>
+                    </li>
+                    <li th:if="${role == 'MANAGER'}" class="sidebar-item">
+                        <a class="sidebar-link" href="/documents/add" aria-expanded="false">
+                            <span>
+                              <i class="ti ti-file-plus"></i>
+                            </span>
+                            <span class="hide-menu">Добавить документ</span>
+                        </a>
+                    </li>
+                    <li th:if="${role == 'ADMIN'}" class="sidebar-item">
+                        <a class="sidebar-link" href="/reports" aria-expanded="false">
+                            <span>
+                              <i class="ti ti-file"></i>
+                            </span>
+                            <span class="hide-menu">Отчеты</span>
+                        </a>
+                    </li>
+                    <li th:if="${role == 'MANAGER'}" class="sidebar-item">
+                        <a class="sidebar-link" href="/reports/add" aria-expanded="false">
+                            <span>
+                              <i class="ti ti-file-plus"></i>
+                            </span>
+                            <span class="hide-menu">Добавить отчет</span>
+                        </a>
+                    </li>
+                    <li th:if="${role == 'NOT'}" class="nav-small-cap">
+                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                        <span class="hide-menu">Авторизация</span>
+                    </li>
+                    <li th:if="${role == 'NOT'}" class="sidebar-item">
+                        <a class="sidebar-link" href="/login" aria-expanded="false">
+                            <span>
+                              <i class="ti ti-login"></i>
+                            </span>
+                            <span class="hide-menu">Вход</span>
+                        </a>
+                    </li>
+                    <li th:if="${role == 'NOT'}" class="sidebar-item">
+                        <a class="sidebar-link" href="/reg" aria-expanded="false">
+                            <span>
+                              <i class="ti ti-user-plus"></i>
+                            </span>
+                            <span class="hide-menu">Регистрация</span>
+                        </a>
+                    </li>
+                </ul>
+
+            </nav>
+        </div>
+    </aside>
+
+</aside>

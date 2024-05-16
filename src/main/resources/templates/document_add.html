@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Добавить</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+
+    <aside th:insert="blocks/aside :: aside"></aside>
+
+    <div class="body-wrapper">
+
+        <header th:insert="blocks/header :: header"></header>
+
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title fw-semibold">Добавить</h5>
+                </div>
+                <div class="card-body">
+                    <form action="/documents/add" method="post" enctype="multipart/form-data" class="row">
+                        <div class="col-6 mb-2">
+                            <p class="fs-4 mb-1">Наименование</p>
+                            <input type="text" required class="form-control" name="name">
+                        </div>
+                        <div class="col-6 mb-2">
+                            <p class="fs-4 mb-1">Файл</p>
+                            <input type="file" required class="form-control" name="file" accept="*/*">
+                        </div>
+                        <div class="col-6 mb-2">
+                            <p class="fs-4 mb-1">Доход</p>
+                            <input type="number" required class="form-control" name="income" min="0" step="0.01">
+                        </div>
+                        <div class="col-6 mb-2">
+                            <p class="fs-4 mb-1">Расход</p>
+                            <input type="number" required class="form-control" name="expense" min="0" step="0.01">
+                        </div>
+                        <div class="col-6 mb-2">
+                            <p class="fs-4 mb-1">Категория</p>
+                            <select name="category" required class="form-select">
+                                <option th:each="i : ${documentCategories}" th:value="${i}" th:label="${i.name}"></option>
+                            </select>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <p class="fs-4 mb-1">Счет</p>
+                            <select name="accountId" required class="form-select">
+                                <option th:each="i : ${accounts}" th:value="${i.id}" th:label="${i.name}"></option>
+                            </select>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <p class="fs-4 mb-1">Подрядчик</p>
+                            <select name="contractorId" required class="form-select">
+                                <option th:each="i : ${contractors}" th:value="${i.id}" th:label="${i.name}"></option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary w-100">Добавить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div th:insert="blocks/footer :: footer"></div>
+
+</div>
+
+</body>
+
+</html>

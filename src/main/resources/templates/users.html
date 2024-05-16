@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Пользователи</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+
+    <aside th:insert="blocks/aside :: aside"></aside>
+
+    <div class="body-wrapper">
+
+        <header th:insert="blocks/header :: header"></header>
+
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title fw-semibold">Пользователи</h5>
+                </div>
+                <div class="card-body">
+                    <form th:each="i : ${users}" th:if="${user.id != i.id}" th:action="${'/users/' + i.id + '/edit'}"
+                          method="post" class="row mb-2">
+                        <div class="col">
+                            <input type="text" readonly class="form-control" th:value="${i.fio}">
+                        </div>
+                        <div class="col">
+                            <select name="role" required class="form-select">
+                                <option th:each="r : ${roles}" th:value="${r}" th:label="${r.name}" th:selected="${r == i.role}"></option>
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-success">Обновить</button>
+                        </div>
+                        <div class="col-auto">
+                            <a th:href="${'/users/' + i.id + '/delete'}" class="btn btn-danger">Удалить</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div th:insert="blocks/footer :: footer"></div>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Подрядчики</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+
+    <aside th:insert="blocks/aside :: aside"></aside>
+
+    <div class="body-wrapper">
+
+        <header th:insert="blocks/header :: header"></header>
+
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title fw-semibold">Подрядчики</h5>
+                </div>
+                <div class="card-body">
+                    <form action="/contractors/add" method="post" class="row">
+                        <div class="col">
+                            <p class="fs-4 mb-1">TIN</p>
+                            <input type="number" required class="form-control" name="tin">
+                        </div>
+                        <div class="col">
+                            <p class="fs-4 mb-1">Наименование</p>
+                            <input type="text" required class="form-control" name="name">
+                        </div>
+                        <div class="col">
+                            <p class="fs-4 mb-1">Адрес</p>
+                            <input type="text" required class="form-control" name="address">
+                        </div>
+                        <div class="col">
+                            <p class="fs-4 mb-1">Тел</p>
+                            <input type="tel" required class="form-control" name="tel">
+                        </div>
+                        <div class="col">
+                            <p class="fs-4 mb-1">Категория</p>
+                            <select name="category" required class="form-select">
+                                <option th:each="c : ${contractorCategories}" th:value="${c}"
+                                        th:label="${c.name}"></option>
+                            </select>
+                        </div>
+                        <div class="col-12 mt-2">
+                            <button type="submit" class="btn btn-primary w-100">Добавить</button>
+                        </div>
+                    </form>
+                    <hr>
+                    <form th:each="i : ${contractors}" th:action="${'/contractors/' + i.id + '/edit'}" method="post"
+                          class="mb-2">
+                        <div class="row mb-2">
+                            <div class="col">
+                                <p class="fs-4 mb-1">TIN</p>
+                                <input type="number" required class="form-control" name="tin" th:value="${i.tin}">
+                            </div>
+                            <div class="col">
+                                <p class="fs-4 mb-1">Наименование</p>
+                                <input type="text" required class="form-control" name="name" th:value="${i.name}">
+                            </div>
+                            <div class="col">
+                                <p class="fs-4 mb-1">Адрес</p>
+                                <input type="text" required class="form-control" name="address" th:value="${i.address}">
+                            </div>
+                            <div class="col">
+                                <p class="fs-4 mb-1">Тел</p>
+                                <input type="tel" required class="form-control" name="tel" th:value="${i.tel}">
+                            </div>
+                            <div class="col">
+                                <p class="fs-4 mb-1">Категория</p>
+                                <select name="category" required class="form-select">
+                                    <option th:each="c : ${contractorCategories}" th:value="${c}"
+                                            th:label="${c.name}" th:selected="${c == i.category}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-success w-100">Обновить</button>
+                            </div>
+                            <div class="col-6">
+                                <a th:href="${'/contractors/'}" class="btn btn-danger w-100">Удалить</a>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div th:insert="blocks/footer :: footer"></div>
+
+</div>
+
+</body>
+
+</html>

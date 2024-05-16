@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Отчеты</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+
+    <aside th:insert="blocks/aside :: aside"></aside>
+
+    <div class="body-wrapper">
+
+        <header th:insert="blocks/header :: header"></header>
+
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title fw-semibold">Отчеты</h5>
+                </div>
+            </div>
+
+            <div class="row">
+                <div th:each="i : ${reports}" class="col-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <p class="fs-5 m-0" th:text="${i.name}"></p>
+                        </div>
+                        <div class="card-body">
+                            <p class="fs-4 mb-1" th:text="${'Менеджер: ' + i.owner.fio}"></p>
+                            <a th:href="${'/img/' + i.file}" target="_blank" class="btn btn-primary w-100">Файл</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <div th:insert="blocks/footer :: footer"></div>
+
+</div>
+
+</body>
+
+</html>

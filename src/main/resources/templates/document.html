@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text="${document.name}"></title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+
+    <aside th:insert="blocks/aside :: aside"></aside>
+
+    <div class="body-wrapper">
+
+        <header th:insert="blocks/header :: header"></header>
+
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title fw-semibold" th:text="${document.name}"></h5>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-2">
+                        <div class="col">
+                            <a href="/documents" class="btn btn-secondary w-100">Назад</a>
+                        </div>
+                        <div class="col">
+                            <a th:href="${'/img/' + document.file}" target="_blank"
+                               class="btn btn-info w-100">Файл</a>
+                        </div>
+                        <div th:if="${role == 'MANAGER'}" class="col">
+                            <a th:href="${'/documents/' + document.id + '/edit'}"
+                               class="btn btn-success w-100">Обновить</a>
+                        </div>
+                        <div class="col">
+                            <a th:href="${'/documents/' + document.id + '/delete'}"
+                               class="btn btn-danger w-100">Удалить</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 mb-2">
+                            <p class="fs-4 m-0" th:text="${'Дата: ' + document.date}"></p>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <p class="fs-4 m-0" th:text="${'Категория: ' + document.category.name}"></p>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <p class="fs-4 m-0" th:text="${'Доход: ' + document.income}"></p>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <p class="fs-4 m-0" th:text="${'Расход: ' + document.expense}"></p>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <p class="fs-4 m-0" th:text="${'Банковский счет: ' + document.account.name}"></p>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <p class="fs-4 m-0" th:text="${'Подрядчик: ' + document.contractor.name}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <p class="fs-4 m-0">Добавить заметку</p>
+                </div>
+                <div class="card-body">
+                    <form th:action="${'/documents/' + document.id + '/comment'}" method="post">
+                        <textarea name="text" required class="form-control mb-2" placeholder="Введите текст"></textarea>
+                        <button type="submit" class="btn btn-primary w-100">Добавить</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <p class="fs-4 m-0">Заметки</p>
+                </div>
+                <div class="card-body">
+                    <div th:each="i : ${document.documentComments}" class="mb-3">
+                        <p class="fs-5 mb-1" th:text="${i.date + ' | ' + i.owner.fio}"></p>
+                        <p class="fs-4 m-0" th:text="${i.text}"></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div th:insert="blocks/footer :: footer"></div>
+
+</div>
+
+</body>
+
+</html>

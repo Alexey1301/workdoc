@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Финансы</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+
+    <aside th:insert="blocks/aside :: aside"></aside>
+
+    <div class="body-wrapper">
+
+        <header th:insert="blocks/header :: header"></header>
+
+        <div class="container-fluid">
+
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title fw-semibold">Финансы</h5>
+                </div>
+                <div class="card-body text-center">
+                    <form action="/finance/filter" method="get" class="row">
+                        <div class="col-auto">
+                            <a href="/finance" class="btn btn-secondary">Сбросить</a>
+                        </div>
+                        <div class="col">
+                            <input type="date" required class="form-control" name="dateWith" th:value="${dateWith}">
+                        </div>
+                        <div class="col">
+                            <input type="date" required class="form-control" name="dateBy" th:value="${dateBy}">
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary">Фильтр</button>
+                        </div>
+                    </form>
+                    <hr>
+                    <p class="fs-4 mb-1">Доходы и расходы</p>
+                    <div id="drawFinance"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script th:inline="javascript" type="text/javascript">
+        var documentFinanceNames = /*[[${documentFinanceNames}]]*/ [];
+        var documentFinanceValues = /*[[${documentFinanceValues}]]*/ [];
+
+        drawFinance();
+
+        function drawFinance() {
+            var options = {
+                series: documentFinanceValues,
+                chart: {
+                    height: 400,
+                    type: 'donut',
+                },
+                labels: documentFinanceNames,
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 200
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }]
+            };
+
+            var chart = new ApexCharts(document.querySelector("#drawFinance"), options);
+            chart.render();
+        }
+
+    </script>
+
+    <div th:insert="blocks/footer :: footer"></div>
+
+</div>
+
+</body>
+
+</html>

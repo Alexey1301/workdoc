@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Аналитика</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+
+    <aside th:insert="blocks/aside :: aside"></aside>
+
+    <div class="body-wrapper">
+
+        <header th:insert="blocks/header :: header"></header>
+
+        <div class="container-fluid">
+
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title fw-semibold">Аналитика</h5>
+                </div>
+                <div class="card-body text-center">
+                    <p class="fs-4 mb-1">Документы по категориям</p>
+                    <div id="drawCategories"></div>
+                    <hr>
+                    <p class="fs-4 mb-1">Банковские счета по статусам</p>
+                    <div id="drawContractor"></div>
+                    <hr>
+                    <p class="fs-4 mb-1">Банковские счета по статусам</p>
+                    <div id="drawAccountStatus"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script th:inline="javascript" type="text/javascript">
+        var categoriesNames = /*[[${categoriesNames}]]*/ [];
+        var categoriesValues = /*[[${categoriesValues}]]*/ [];
+        var accountStatusNames = /*[[${accountStatusNames}]]*/ [];
+        var accountStatusValues = /*[[${accountStatusValues}]]*/ [];
+        var contractorNames = /*[[${contractorNames}]]*/ [];
+        var contractorValues = /*[[${contractorValues}]]*/ [];
+    </script>
+    <script src="/js/stats.js"></script>
+
+    <div th:insert="blocks/footer :: footer"></div>
+
+</div>
+
+</body>
+
+</html>

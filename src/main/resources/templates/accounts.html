@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Банковские счета</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+
+    <aside th:insert="blocks/aside :: aside"></aside>
+
+    <div class="body-wrapper">
+
+        <header th:insert="blocks/header :: header"></header>
+
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title fw-semibold">Банковские счета</h5>
+                </div>
+                <div class="card-body">
+                    <form action="/accounts/add" method="post" class="row">
+                        <div class="col">
+                            <p class="fs-4 mb-1">Наименование</p>
+                            <input type="text" required class="form-control" name="name">
+                        </div>
+                        <div class="col">
+                            <p class="fs-4 mb-1">Сумма</p>
+                            <input type="number" required class="form-control" name="sum" min="0" step="0.01">
+                        </div>
+                        <div class="col">
+                            <p class="fs-4 mb-1">Валюта</p>
+                            <input type="text" required class="form-control" name="currency">
+                        </div>
+                        <div class="col-12 mt-2">
+                            <button type="submit" class="btn btn-primary w-100">Добавить</button>
+                        </div>
+                    </form>
+                    <hr>
+                    <form th:each="i : ${accounts}" th:action="${'/accounts/' + i.id + '/edit'}" method="post"
+                          class="mb-2">
+                        <div class="row mb-2">
+                            <div class="col-auto">
+                                <p class="fs-4 mb-1">Дата открытия</p>
+                                <input type="date" readonly class="form-control" th:value="${i.date}">
+                            </div>
+                            <div class="col">
+                                <p class="fs-4 mb-1">Наименование</p>
+                                <input type="text" required class="form-control" name="name" th:value="${i.name}">
+                            </div>
+                            <div class="col">
+                                <p class="fs-4 mb-1">Сумма</p>
+                                <input type="number" required class="form-control" name="sum" min="0" step="0.01"
+                                       th:value="${i.sum}">
+                            </div>
+                            <div class="col">
+                                <p class="fs-4 mb-1">Валюта</p>
+                                <input type="text" required class="form-control" name="currency"
+                                       th:value="${i.currency}">
+                            </div>
+                            <div class="col">
+                                <p class="fs-4 mb-1">Статус</p>
+                                <input th:if="${i.status == true}" type="text" readonly class="form-control" name="currency" value="Активен">
+                                <input th:if="${i.status == false}" type="text" readonly class="form-control" name="currency" value="Заблокирован">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <button type="submit" class="btn btn-success w-100">Обновить</button>
+                            </div>
+                            <div class="col-4">
+                                <a th:href="${'/accounts/' + i.id + '/status'}" class="btn btn-secondary w-100">Изменить статус</a>
+                            </div>
+                            <div class="col-4">
+                                <a th:href="${'/accounts/' + i.id + '/delete'}" class="btn btn-danger w-100">Удалить</a>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div th:insert="blocks/footer :: footer"></div>
+
+</div>
+
+</body>
+
+</html>
